@@ -11,55 +11,38 @@ Handle incoming port 80 HTTP and 443 HTTPS requests based on domain names.
 
 ## Install and configure
 
+## Build chain A:
 ```
-sudo apt install sniproxy
+sudo apt install golang-go
 ```
-Edit the config in a way that reflects your server infrastructure:
-
+For your "old" debian arm boxes like raspi and odroid. The "reference" implementation (available as golang-go) is the de-facto standard compiler. There is also ```gcc-go```, but I didn't use that.
+## Alternative 1:
 ```
-sudo nano /etc/sniproxy.conf
+git clone --recursive https://github.com/inetaf/tcpproxy
+cd tcpproxy/cmd/tlsrouter
+go build .
 ```
-
+1232 stars, 1 dependency, confirmed working, very easy config
+## Alternative 2a:
 ```
-user daemon
-
-pidfile /tmp/sniproxy.pid
-
-error_log {
-    syslog daemon
-    priority notice
-}
-
-listener 0.0.0.0:80 {
-    protocol http
-    table TableHTTP
-    fallback 127.0.0.1:7890
-}
-
-listener 0.0.0.0:443 {
-    protocol tls
-    table TableHTTPS
-    fallback 127.0.0.1:7891
-}
-
-table TableHTTP {
-    example.myftp.org 10.0.0.16:9080
-    example.noip.me 127.0.0.1:9080
-    example.ddns.net 127.0.0.1:9080
-}
-
-table TableHTTPS {
-    example.myftp.org 10.0.0.16:2443
-    example.noip.me 127.0.0.1:3443
-    example.ddns.net 127.0.0.1:4443
-}
+git clone --recursive https://github.com/atenart/sniproxy/tree/archive/go
+cd sniproxy/cmd/sniproxy
+go build .
 ```
-
-To reload sniproxy configuration without terminating existing connections simply send a SIGHUP via ```htop``` or ```kill```.
+24 stars, 0 dependencies, confirmed working, also easy config
+## Build chain B:
 ```
-sudo kill -s SIGHUP $(</tmp/sniproxy.pid)
+https://www.rust-lang.org/tools/install
 ```
-
+The rust programming language installed via rustup from official site, default setup.  
+Remember to put it on path as explained in terminal afterwards.
+## Alternative 2b:
+```
+git clone --recursive https://github.com/atenart/sniproxy
+cd sniproxy
+cargo build --release
+```
+Same, but written in Rust.
 
 ## Honeypots for disconnecting bots
 
