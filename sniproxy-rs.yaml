@@ -1,0 +1,19 @@
+bind_https: "[::]:1443"
+bind_http: "[::]:8080"
+routes:
+- domains:
+  - "example.com"
+  backend:
+    address: "10.0.0.7:3443"
+- domains:
+  - "www.example.com"
+  backend:
+    address: "10.0.0.7:3443"
+- domains:
+  - "ran.example.com"
+  backend:
+    address: "127.0.0.1:2443"
+- domains:
+  - "chen.example.com"
+  backend:
+    address: "10.0.0.7:4443"
