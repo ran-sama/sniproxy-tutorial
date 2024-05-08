@@ -11,32 +11,32 @@ Handle incoming port 80 HTTP and 443 HTTPS requests based on domain names.
 
 ## Install and configure
 
-## Build chain A:
+### Build chain A:
 ```
 sudo apt install golang-go
 ```
 For your "old" debian arm boxes like raspi and odroid. The "reference" implementation (available as golang-go) is the de-facto standard compiler. There is also ```gcc-go```, but I didn't use that.
-## Alternative 1:
+### Alternative 1:
 ```
 git clone --recursive https://github.com/inetaf/tcpproxy
 cd tcpproxy/cmd/tlsrouter
 go build .
 ```
 1232 stars, 1 dependency, confirmed working, very easy config
-## Alternative 2a:
+### Alternative 2a:
 ```
 git clone --recursive https://github.com/atenart/sniproxy/tree/archive/go
 cd sniproxy/cmd/sniproxy
 go build .
 ```
 24 stars, 0 dependencies, confirmed working, also easy config
-## Build chain B:
+### Build chain B:
 ```
 https://www.rust-lang.org/tools/install
 ```
 The rust programming language installed via rustup from official site, default setup.  
 Remember to put it on path as explained in terminal afterwards.
-## Alternative 2b:
+### Alternative 2b:
 ```
 git clone --recursive https://github.com/atenart/sniproxy
 cd sniproxy
